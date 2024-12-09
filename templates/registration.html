@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Registration page
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="/static/style_auth_page.css">
+{% endblock %}
+
+{% block body %}
+<div class="cont">
+    <form method="get" id="loginForm">
+        <div class="login">
+            <label for="login">Введите свой логин</label>
+            <input type="text" name="login" id="usname">
+        </div>
+        <div class="password">
+            <label for="password">Введите свой пароль</label>
+            <input type="text" name="password" id="password">
+        </div>
+        <div class="b">
+            <button type="submit" id="button">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script src="/static/auth.js"></script>
+{% endblock %}

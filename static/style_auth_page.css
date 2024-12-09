@@ -1,0 +1,19 @@
+.cont {
+    width: 500px;
+    height: 600px;
+}
+
+.login {}
+
+.password {}
+
+.b {
+    text-align: center;
+}
+
+#button {
+    margin-top: 10px;
+    border-radius: 50px;
+    background-color: grey;
+    border: 1px solid black
+}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block title %}
+Auth page
+{% endblock %}
+
+{% block body %}
+<h1>Auth page</h1>
+<div class="cont">
+    <form method="get">
+        <div class="login">
+            <label for="login">Введите свой логин</label>
+            <input type="text" name="login" id="usname">
+        </div>
+        <div class="password">
+            <label for="password">Введите свой пароль</label>
+            <input type="text" name="password" id="password">
+        </div>
+        <div class="b">
+            <button type="submit" id="button">Log in</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
