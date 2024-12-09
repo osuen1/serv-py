@@ -4,9 +4,9 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     const username = document.getElementById('usname').value;
     const password = document.getElementById('password').value;
 
-    const data = { username: username, password: password };
+    const data = { username: username, password: password }
 
-    fetch('/registration', {
+    fetch('/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -15,10 +15,10 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     })
     .then(response => response.json())
     .then(data => {
-        alert('Пользователь добавлен');
-        location.href = "/login";
+        if (data.error) {
+            alert(data.error);  // Показываем ошибку
+        } else {
+            location.href = "/account";  // Переходим на страницу аккаунта
+        }
     })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-});
+})

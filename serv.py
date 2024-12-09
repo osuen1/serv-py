@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, jsonify
-from auth import add_to_database
+from flask import Flask, render_template, request, jsonify, url_for
+from auth import add_to_database, check_user
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ def hello():
     return render_template('index.html')
 
 @app.route('/registration', methods=['GET', 'POST'])
-def login():
+def registration():
     if request.method == 'GET':
         return render_template('registration.html')
     elif request.method == 'POST':
@@ -28,9 +28,25 @@ def login():
         else:
             return jsonify({'error': 'Invalid JSON format'}), 400
 
-@app.route('/login', methods=['POST', 'GET'])
-def auth():
-    return render_template('log_in.html')
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('log_in.html')
+    elif request.method == 'POST':
+        if request.is_json:
+            data = request.get_json()
+            username = data['username']
+            password = data['password']
+
+            if username is not None and password is not None:
+                if check_user(username, password):
+                   return jsonify({'url': url_for('account')})
+                else:
+                    return 'Попробуйте еще раз'
+
+@app.route('/account')
+def account():
+    return render_template('account.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
