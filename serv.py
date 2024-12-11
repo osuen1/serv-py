@@ -44,9 +44,9 @@ def login():
                 else:
                     return 'Попробуйте еще раз'
 
-@app.route('/account')
+@app.route('/Welcome')
 def account():
-    return render_template('account.html')
+    return render_template('welcome.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

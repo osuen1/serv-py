@@ -18,7 +18,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         if (data.error) {
             alert(data.error);  // Показываем ошибку
         } else {
-            location.href = "/account";  // Переходим на страницу аккаунта
+            location.href = "/Welcome";  // Переходим на страницу аккаунта
         }
     })
 })
