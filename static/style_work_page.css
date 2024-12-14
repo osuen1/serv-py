@@ -1,0 +1,53 @@
+.cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 450px;
+    height: auto;
+}
+
+.cont-workspase {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border: 1px solid black;
+    border-radius: 30px;
+    width: 400px;
+    height: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.text-area {
+    width: 100%;
+}
+
+#e_t {
+    width: 100%;
+    height: 60px;
+    resize: none;
+    padding: 10px;
+    box-sizing: border-box;
+    border: none;
+}
+
+.submit-button {
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+.s_b {
+    border: 1px solid black;
+    border-radius: 50%;
+    cursor: pointer;
+}
