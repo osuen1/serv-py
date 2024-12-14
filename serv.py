@@ -48,5 +48,9 @@ def login():
 def account():
     return render_template('welcome.html')
 
+@app.route('/work')
+def work():
+    return render_template('work.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
