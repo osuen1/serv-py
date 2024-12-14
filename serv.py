@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify, url_for
 from auth import add_to_database, check_user
+from dialog import add_to_dialog_session
 
 app = Flask(__name__)
 
@@ -48,9 +49,16 @@ def login():
 def account():
     return render_template('welcome.html')
 
-@app.route('/work')
+@app.route('/work', methods=['GET', 'POST'])
 def work():
-    return render_template('work.html')
+    if request.method == 'GET':
+        return render_template('work.html')
+    elif request.method == 'POST':
+        if request.json:
+            data = request.get_json()
+            message = data['message']
+            add_to_dialog_session(message)
+            return jsonify({'message': f'{message}'})
 
 if __name__ == '__main__':
     app.run(debug=True)

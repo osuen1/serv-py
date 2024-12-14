@@ -11,17 +11,21 @@
 <body>
     <div class="cont">
         <div class="main">
-            <h2>укепавука</h2>
-            <div class="cont-workspase">
-                <div class="text-area">
-                    <textarea name="enter_text" id="e_t" autofocus="true">Введите что-нибудь...</textarea>
+            <form method="get" id="form"> <!-- TODO: переписать id формы -->
+                <h2>укепавука</h2>
+                <div class="cont-workspase">
+                    <div class="text-area">
+                        <textarea name="enter_text" id="e_t" autofocus="true">Введите что-нибудь...</textarea>
+                    </div>
+                    <div class="submit-button">
+                        <button type="submit" class="s_b">&uarr;</button>
+                    </div>
                 </div>
-                <div class="submit-button">
-                    <button type="submit" class="s_b">&uarr;</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
+
+    <script src="/static/work.js"></script>
 </body>
 
 </html>
