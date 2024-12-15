@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, url_for
-from auth import add_to_database, check_user
+from auth import add_to_database, check_user, connect
 from dialog import add_to_dialog_session
 
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def registration():
                 return jsonify({'error': 'Missing username or password'}), 400
             
             try:
-                add_to_database(username, password)
+                connect(add_to_database(username, password))
                 return jsonify({'message': f'User {username} successfully registered.'}), 200
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
