@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify, url_for
 from auth import add_to_database, check_user, connect
 from dialog import add_to_dialog_session
+import hashlib as h
+# import bcrypt as bc
 
 app = Flask(__name__)
 
@@ -17,12 +19,15 @@ def registration():
             data = request.get_json()
             username = data.get('username')
             password = data.get('password')
+
+            username_hash = h.sha256(username.encode()).hexdigest()
+            password_hash = h.sha256(password.encode()).hexdigest()
             
             if username is None or password is None:
                 return jsonify({'error': 'Missing username or password'}), 400
             
             try:
-                connect(add_to_database(username, password))
+                connect(add_to_database(username_hash, password_hash))
                 return jsonify({'message': f'User {username} successfully registered.'}), 200
             except Exception as e:
                 return jsonify({'error': str(e)}), 500
@@ -39,8 +44,11 @@ def login():
             username = data['username']
             password = data['password']
 
+            usr_hash = h.sha256(username.encode()).hexdigest()
+            pswrd_hash = h.sha256(password.encode()).hexdigest()
+
             if username is not None and password is not None:
-                if check_user(username, password):
+                if check_user(usr_hash, pswrd_hash):
                    return jsonify({'url': url_for('account')})
                 else:
                     return 'Попробуйте еще раз'
