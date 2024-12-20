@@ -1,4 +1,6 @@
 import psycopg2 as ps
+import dotenv
+import os
 
 def connect(data):
     with ps.connect(dbname='app', user='postgres', password='12345678', host='localhost', port='5432') as conn:
