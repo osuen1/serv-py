@@ -14,5 +14,9 @@ document.getElementById('form').addEventListener('submit', function (event) {
     .then(response => response.json())
     .then(data => {
         console.log(data);
+
+        answer = data['generated_text'];
+        new_element = document.getElementById('response');
+        new_element.textContent = answer;
     });
 });

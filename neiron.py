@@ -1,13 +1,18 @@
-from transformers import AutoTokenizer, AutoModelForCausalLM
+import requests
+from dotenv import load_dotenv
+import os
 
-model_name = "mistralai/Mistral-7B-Instruct-v0.3"
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype="auto")
+load_dotenv()
+url = os.getenv('API_URL')
+token = os.getenv('TOKEN')
+headers = {
+    "Authorization": f"Bearer {token}"
+}
 
-def generate_response(message):
-    inputs = tokenizer(message, return_tensors='pt')
-    outputs = model.generate(inputs.input_ids, max_length=150, num_return_sequences=1)
-    return tokenizer.decode(outputs[0], skip_special_tokens=True)
+def query(message):
+    payload = {
+        'inputs': message
+    }
 
-m = input('///')
-print(generate_response(m))
+    response = requests.post(url=url, headers=headers, json=payload)
+    return response.json()

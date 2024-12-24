@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, jsonify, url_for
-from auth import add_to_database, check_user, connect
-from dialog import add_to_dialog_session
 import hashlib as h
 # import bcrypt as bc
+
+from auth import add_to_database, check_user, connect
+from dialog import add_to_dialog_session
+from neiron import query
 
 app = Flask(__name__)
 
@@ -66,7 +68,10 @@ def work():
             data = request.get_json()
             message = data['message']
             add_to_dialog_session(message)
-            return jsonify({'message': f'{message}'})
+            
+            output = query(message)[0]
+            
+            return jsonify(output)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,9 +1,13 @@
 import psycopg2 as ps
-import dotenv
+from dotenv import load_dotenv
 import os
 
+load_dotenv()
+usr = os.getenv('USER')
+password = os.getenv('PASSWORD')
+
 def connect(data):
-    with ps.connect(dbname='app', user='postgres', password='12345678', host='localhost', port='5432') as conn:
+    with ps.connect(dbname='app', user=usr, password=password, host='localhost', port='5432') as conn:
         if conn:
             curs = conn.cursor()
 
@@ -16,7 +20,7 @@ def connect(data):
             return result
 
 def add_to_database(username, password): # добавляем пользователя
-    return f'''
+    return f'''/
             INSERT INTO users(login, password)
             VALUES ('{username}', '{password}');
         '''
