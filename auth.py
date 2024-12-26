@@ -20,7 +20,7 @@ def connect(data):
             return result
 
 def add_to_database(username, password): # добавляем пользователя
-    return f'''/
+    return f'''
             INSERT INTO users(login, password)
             VALUES ('{username}', '{password}');
         '''

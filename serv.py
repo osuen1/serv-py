@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, jsonify, url_for
+from flask import Flask, render_template, request, jsonify, url_for, session, redirect
 import hashlib as h
+import secrets
 # import bcrypt as bc
 
 from auth import add_to_database, check_user, connect
@@ -7,6 +8,7 @@ from dialog import add_to_dialog_session
 from neiron import query
 
 app = Flask(__name__)
+app.secret_key = secrets.token_hex()
 
 @app.route('/')
 def hello():
@@ -46,6 +48,8 @@ def login():
             username = data['username']
             password = data['password']
 
+            session['username'] = username
+
             usr_hash = h.sha256(username.encode()).hexdigest()
             pswrd_hash = h.sha256(password.encode()).hexdigest()
 
@@ -57,11 +61,13 @@ def login():
 
 @app.route('/Welcome')
 def account():
-    return render_template('welcome.html')
+    if 'username' in session:
+        return render_template('welcome.html')
+    return redirect(url_for('login'))
 
 @app.route('/work', methods=['GET', 'POST'])
 def work():
-    if request.method == 'GET':
+    if request.method == 'GET' and 'username' in session:
         return render_template('work.html')
     elif request.method == 'POST':
         if request.json:
@@ -72,6 +78,7 @@ def work():
             output = query(message)[0]
             
             return jsonify(output)
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
